@@ -36,7 +36,7 @@ class QuandlEnvSrc(object):
   '''
 
   MinPercentileDays = 100 
-  QuandlAuthToken = ""  # not necessary, but can be used if desired
+  QuandlAuthToken = "wdC_ndskg_ZaxSyWLySY"  # not necessary, but can be used if desired
   Name = "TSE/9994" # https://www.quandl.com/search (use 'Free' filter)
 
   def __init__(self, days=252, name=Name, auth=QuandlAuthToken, scale=True ):

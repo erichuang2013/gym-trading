@@ -148,7 +148,7 @@ class PolicyGradient(object) :
                 epr = np.vstack(rs)
                 epy = np.vstack(ys)
                 xs,rs,ys = [],[],[] # reset game history
-                df = env.env.sim.to_df()
+                df = env.sim.to_df()
                 #pdb.set_trace()
                 simrors[episode]=df.bod_nav.values[-1]-1 # compound returns
                 mktrors[episode]=df.mkt_nav.values[-1]-1

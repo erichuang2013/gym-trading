@@ -9,6 +9,7 @@ from numpy import random
 import pandas as pd
 import logging
 import pdb
+import os
 
 import tempfile
 
@@ -40,15 +41,17 @@ class QuandlEnvSrc(object):
   Name = "TSE/9994" # https://www.quandl.com/search (use 'Free' filter)
 
   def __init__(self, days=252, name=Name, auth=QuandlAuthToken, scale=True ):
-    self.name = name
-    self.auth = auth
+    # self.name = name
+    # self.auth = auth
     self.days = days+1
-    log.info('getting data for %s from quandl...',QuandlEnvSrc.Name)
-    df = quandl.get(self.name) if self.auth=='' else quandl.get(self.name, authtoken=self.auth)
-    log.info('got data for %s from quandl...',QuandlEnvSrc.Name)
-    
-    df = df[ ~np.isnan(df.Volume)][['Close','Volume']]
+    # log.info('getting data for %s from quandl...',QuandlEnvSrc.Name)
+    # df = quandl.get(self.name) if self.auth=='' else quandl.get(self.name, authtoken=self.auth)
+    # log.info('got data for %s from quandl...',QuandlEnvSrc.Name)
+    # df = df[ ~np.isnan(df.Volume)][['Close','Volume']]
     # we calculate returns and percentiles, then kill nans
+    current = os.path.dirname(os.path.abspath(__file__))
+    df = pd.read_csv(current + '/' + 'tx_test.csv')
+    print(df.columns)
     df = df[['Close','Volume']]   
     df.Volume.replace(0,1,inplace=True) # days shouldn't have zero volume..
     df['Return'] = (df.Close-df.Close.shift())/df.Close.shift()

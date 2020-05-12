@@ -76,7 +76,7 @@ class QuandlEnvSrc(object):
     self.step = 0
 
   def _step(self):    
-    obs = self.data.iloc[self.idx].as_matrix()
+    obs = self.data.iloc[self.idx].to_numpy()
     self.idx += 1
     self.step += 1
     done = self.step >= self.days

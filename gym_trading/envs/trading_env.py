@@ -243,6 +243,7 @@ class TradingEnv(gym.Env):
         For training purposes, you might not want to set both.
     """
     logfile = None
+    need_df = True
     if write_log:
       logfile = tempfile.NamedTemporaryFile(delete=False)
       log.info('writing log to %s',logfile.name)

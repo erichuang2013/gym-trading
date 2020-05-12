@@ -31,7 +31,7 @@ class PolicyGradient(object) :
                  sess,                # tensorflow session
                  obs_dim,             # observation shape
                  num_actions,         # number of possible actions
-                 neurons_per_dim=32,  # hidden layer will have obs_dim * neurons_per_dim neurons
+                 neurons_per_dim=128,  # hidden layer will have obs_dim * neurons_per_dim neurons
                  learning_rate=1e-2,  # learning rate
                  gamma = 0.9,         # reward discounting 
                  decay = 0.9          # gradient decay rate
@@ -163,7 +163,7 @@ class PolicyGradient(object) :
                              running_reward, simrors[episode],mktrors[episode], simrors[episode]-mktrors[episode])
                     save_path = self._saver.save(self._sess, model_dir+'model.ckpt',
                                                  global_step=episode+1)
-                    if episode > 100:
+                    if episode > 1000:
                         vict = pd.DataFrame( { 'sim': simrors[episode-100:episode],
                                                'mkt': mktrors[episode-100:episode] } )
                         vict['net'] = vict.sim - vict.mkt
